@@ -1,10 +1,10 @@
 ## nginx支持php访问
-test.conf
+test.cc.conf
 ```
 server {
     listen 80;
     server_name test.cc;
-    root /home/wwwroot/test;
+    root /home/wwwroot/test.cc;
     index index.php;
 
     location / {
@@ -12,7 +12,8 @@ server {
     }
 
     location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+        #fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+        fastcgi_pass unix:/var/run/php-fpm/php-fpm.pid;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
